@@ -14,7 +14,9 @@ function Search() {
         console.log("Search for " + searchInput);
 
         try {
-            const res = await fetch(`https://13.59.63.214:443/search?q=${encodeURIComponent(searchInput)}`);
+            const res = await fetch(`https://13.59.63.214:443/search?q=${encodeURIComponent(searchInput)}`, {
+                credentials: 'include',
+            });
             if (!res.ok) {
                 throw new Error("Failed to fetch search results");
             }
