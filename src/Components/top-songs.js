@@ -11,13 +11,13 @@ const TopSongs = () => {
 
     const handleLogin = () => {
         setIsLoading(true);
-        window.location.href = "http://13.59.63.214:80/login";
+        window.location.href = "https://13.59.63.214:443/login";
     };
 
     const checkLoginStatus = async () => {
         try {
 
-            const res = await fetch("http://13.59.63.214:80/check-auth", {
+            const res = await fetch("https://13.59.63.214:443/check-auth", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -39,7 +39,7 @@ const TopSongs = () => {
     }
 
     const fetchUserData = async () => {
-        const res = await fetch("http://13.59.63.214:80/user-data", {
+        const res = await fetch("https://13.59.63.214:443/user-data", {
             method: "GET",
             credentials: 'include',
         });
