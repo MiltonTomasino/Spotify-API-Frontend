@@ -48,9 +48,12 @@ const TopSongs = () => {
         // }
     }
 
-    const fetchUserData = async () => {
+    const fetchUserData = async (token) => {
         const res = await fetch("https://sp-api-test.lol/user-data", {
             method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             credentials: 'include',
         });
         const data = await res.json();
