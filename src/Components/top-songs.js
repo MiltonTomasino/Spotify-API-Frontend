@@ -10,36 +10,42 @@ const TopSongs = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = () => {
-        setIsLoading(true);
+        // setIsLoading(true);
         window.location.href = "https://sp-api-test.lol/login";
     };
 
-    const checkLoginStatus = async () => {
-        try {
+    const processingLoginToken = () => {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
 
-            const res = await fetch("https://sp-api-test.lol/check-auth", {
-                method: "GET",
-                credentials: 'include',
-                methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-                allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
-            });
-
-            if (res.ok) {
-                setIsLoggedIn(true);
-                fetchUserData();
-                setIsLoading(false);
-            } else {
-                console.log("FAILED TO GET COOKIE")
-                console.log("CLIENT COOKIE", res.cookie);
-                setIsLoggedIn(false);
-                setIsLoading(false);
-            }
-
-        } catch (error) {
-            console.error("Error checking login status", error);
-            setIsLoggedIn(false);
-            setIsLoading(false);
+        if (token) {
+            localStorage.setItem("accessToken", token);
+            window.history.replaceState({}, document.title, "/");
+            setIsLoggedIn(true);
+            fetchUserData(token);
         }
+
+    };
+
+    const checkLoginStatus = async () => {
+
+        const token = localStorage.getItem("accessToken");
+
+        if (token) {
+            setIsLoggedIn(true);
+            fetchUserData(token);
+        } else {
+            setIsLoggedIn(false);
+        }
+        // try {
+
+            
+
+        // } catch (error) {
+        //     console.error("Error checking login status", error);
+        //     setIsLoggedIn(false);
+        //     setIsLoading(false);
+        // }
     }
 
     const fetchUserData = async () => {
@@ -54,6 +60,7 @@ const TopSongs = () => {
     };
 
     useEffect(() => {
+        processingLoginToken();
         checkLoginStatus();
     }, [])
 
