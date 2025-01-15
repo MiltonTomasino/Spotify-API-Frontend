@@ -29,6 +29,8 @@ const TopSongs = () => {
                 fetchUserData();
                 setIsLoading(false);
             } else {
+                console.log("FAILED TO GET COOKIE")
+                console.log("CLIENT COOKIE", res.cookie);
                 setIsLoggedIn(false);
                 setIsLoading(false);
             }
