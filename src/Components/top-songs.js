@@ -11,15 +11,17 @@ const TopSongs = () => {
 
     const handleLogin = () => {
         setIsLoading(true);
-        window.location.href = "https://3.145.49.130:443/login";
+        window.location.href = "https://sp-api-test.lol/login";
     };
 
     const checkLoginStatus = async () => {
         try {
 
-            const res = await fetch("https://3.145.49.130:443/check-auth", {
+            const res = await fetch("https://sp-api-test.lol/check-auth", {
                 method: "GET",
                 credentials: 'include',
+                methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+                allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
             });
 
             if (res.ok) {
@@ -39,7 +41,7 @@ const TopSongs = () => {
     }
 
     const fetchUserData = async () => {
-        const res = await fetch("https://3.145.49.130:443/user-data", {
+        const res = await fetch("https://sp-api-test.lol/user-data", {
             method: "GET",
             credentials: 'include',
         });

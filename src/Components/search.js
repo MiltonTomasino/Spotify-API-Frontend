@@ -14,7 +14,7 @@ function Search() {
         console.log("Search for " + searchInput);
 
         try {
-            const res = await fetch(`https://3.145.49.130:443/search?q=${encodeURIComponent(searchInput)}`, {
+            const res = await fetch(`https://sp-api-test.lol/search?q=${encodeURIComponent(searchInput)}`, {
                 credentials: 'include',
             });
             if (!res.ok) {
