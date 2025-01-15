@@ -18,6 +18,8 @@ const TopSongs = () => {
         const params = new URLSearchParams(window.location.search);
         const token = params.get('token');
 
+        console.log("Extracted token:", token);
+
         if (token) {
             localStorage.setItem("accessToken", token);
             window.history.replaceState({}, document.title, "/");
